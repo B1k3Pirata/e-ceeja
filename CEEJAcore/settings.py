@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     #Meus
-
+    'agenda.apps.AgendaConfig',
+    'paginaBase.apps.PaginabaseConfig',
+    'perfil.apps.PerfilConfig',
+    'usuario.apps.UsuarioConfig',
 ]
 
 MIDDLEWARE = [
