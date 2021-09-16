@@ -1,51 +1,48 @@
 from django.db import models
-import uuid
-from datetime import datetime, date, time
+from django.contrib.auth.models import User
 
-app_name = 'usrs'
+import uuid
+from datetime import datetime, date
+
+
 # Create your models here.
 
-class Usuario(models.Model):
+class EstudoM(models.Model):
+    digital = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+
+    tp = [
+        ('E.Perma','Exame Permanente'),
+        ('E.Persona','Ensino Personalizado')
+    ]
+
+    cad = models.CharField(max_length=10,choices=tp, verbose_name='Em qual modalidade de Ensino/Avaliação você está se candidatando?')
+    nvl = [
+        ('N.Fundamental','Nível Fundamental'),
+        ('N.Médio','Nível Médio')
+    ]
+    nivel = models.CharField(max_length=20, choices=nvl, verbose_name="Qual o Nível de Ensino?")
+
+
+
+    def Grupo(self):
+        if tp == 'E.Perma':
+            g = 'Candidato'
+            return g
+        else:
+            g = 'Aluno'
+            return g
+        grupo = models.CharField(g, max_length=10)
+    def __str__(self):
+        return "{}{}".format(self.cad, self.nivel)
+
+class Aluno(models.Model):
     nome = models.CharField(max_length=255, verbose_name='Preencha seu nome completo e sem abreviação.')
     snome = models.CharField(max_length=255, verbose_name='Preencha seu sobrenome completo e sem abreviação.')
     dataMat = models.DateField(auto_now_add=True)
-    matr = [0]
-
-    def ordinal(n):
-        if self.nome != '':
-            s = 0
-            while n:
-                s += n % 10 #soma 's' ao ultimo numero de 'n'
-                n //= 10 #remove o ultimo valor de 'n'
-            return s
+    #ano = models.DateField()
 
     def __str__(self):
-        return "{}{}".format(self.nome, self.snome)
-
-class DocPessoal(models.Model):
-    CPF = models.CharField(max_length=11)
-    RG  = models.CharField(max_length=12)
-    filia_1 = models.CharField(max_length=255, verbose_name='Filiação 1')
-    filia_2 = models.CharField(max_length=255, verbose_name='Filiação 2')
-
-    def __str__(self):
-        return "{}{}".format(self.CPF, self.RG)
-
-    usuario =  models.OneToOneField('Usuario', on_delete=models.CASCADE)
-
-class Ensino(models.Model):
-    tipo = [
-        ('Ex.Perm','Exame Permanente'),
-        ('Ens.Pers','Ensino Personalizado')
-    ]
-    nvl = [
-        ('N.Fd','Nível Fundamental'),
-        ('N.Md','Nível Médio')
-    ]
-    cadEns = models.CharField(max_length=10, choices=tipo, verbose_name='Em qual modalidade de Ensino/Avaliação você está se candidatando?')
-    nivel = models.CharField(max_length=18, choices=nvl, verbose_name='Qual nível de ensino você está se candidatando?')
-
-    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+        return  "{}{}".format(self.nome, self.snome, self.dataMat)
 
 class Pessoal(models.Model):
     #fonte de dados
@@ -78,22 +75,23 @@ class Pessoal(models.Model):
     ]
 
 
-    Dnasc = models.DateField(null=False, blank=False, verbose_name="data de nascimento")
+    nasc = models.DateField(null=False, blank=False, verbose_name="data de nascimento")
     sexo = models.CharField(max_length=10, choices=Sexo)
     raca = models.CharField(max_length=10, choices=Raca,verbose_name="raça")
     qprenm = models.CharField(max_length=10, choices=QPNL,verbose_name="deseja usar pré-nome social?")
     prenm = models.CharField(max_length=255,verbose_name="digite o seu pré-nome social, caso possua.")
-
+    filia_1 = models.CharField(max_length=255,verbose_name="Filiação #1")
+    filia_2 = models.CharField(max_length=255,verbose_name="Filiação #2")
     nacio = models.CharField(max_length=10, choices=NAC,verbose_name="nacionalidade")
     qnacio = models.CharField(max_length=255,verbose_name="nacionalidade")
     ufnasc = models.CharField(max_length=10, choices=UF,verbose_name="UF de nascimento")
     locnasc = models.CharField(max_length=255, verbose_name="local de nascimento")
 
-    usuario = models.ForeignKey(Usuario,null=True, blank=True, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno,null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return  "{}{}{}{}{}{}{}{}{}{}{}{}".format(self.Dnasc, self.sexo,
-        self.raca, self.qprenm, self.prenm, self.nacio, self.qnacio, self.ufnasc)
+        return  "{}{}{}{}{}{}{}{}{}{}{}{}".format(self.nome, self.snome, self.nasc, self.sexo,
+        self.raca, self.qprenm, self.prenm, self.mae, self.pai, self.nacio, self.qnacio, self.ufnasc)
 
 class Doc(models.Model):
     #Documentos
@@ -141,62 +139,7 @@ class Doc(models.Model):
     cpf = models.CharField(max_length=105,verbose_name="C.P.F.")
     pasp = models.CharField(max_length=105,verbose_name="passaporte")
 
-    usuario = models.ForeignKey(Usuario,null=True, blank=True, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return  "({}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{})".format(
-            self.qpcer, self.tpcerl, self.nocer, self.licer, self.flcer, self.emtcr,
-            self.cartc, self.ufcrt, self.cidcrt, self.qrg, self.norg, self.orgrg, self.ufrg,
-            self.dtrg, self.cpf, self.pasp
-            )
-
-class Doc(models.Model):
-    #Documentos
-    QCer = [
-        ("S","Sim"),
-        ("N","Não"),
-    ]
-    TPCerL = [
-        ("Nasc","Nascimento"),
-        ("Casa", "Casamento"),
-        ("Divo","Divórcio"),
-    ]
-    Qrg = [
-        ("S","Sim"),
-        ("N","Não"),
-    ]
-    QZon = [
-        ("S","Sim"),
-        ("N","Não"),
-    ]
-    UF = [
-        ("PA","PA"), ("AM","AM"),("AC","AC"),("AP","AP"),("RR","RR"),("MA","MA"),("TO","TO"),
-        ("AL","AL"),("PE","PE"),("GO","GO"),("ES","ES"),("BA","BA"),("MT","MT"),("MS","MS"),("MG","MG"),
-        ("PR","PR"),("PI","PI"),("RJ","RJ"),("RN","RN"),("RS","RS"),("RO","RO"),("SC","SC"),("SP","SP"),
-        ("SE","SE"),
-    ]
-#certidão
-    qpcer = models.CharField(max_length=10, choices=QCer,verbose_name="Possui Certidão?")
-    tpcerl = models.CharField(max_length=10, choices=TPCerL,verbose_name="Tipo de certidão")
-    nocer = models.CharField(max_length=255,verbose_name="número da certidão")
-    licer = models.CharField(max_length=105,verbose_name="livro da certidão")
-    flcer = models.CharField(max_length=105,verbose_name="folha da certidão")
-    emtcr = models.CharField(max_length=105,verbose_name="data de emissão da certidão")
-    cartc = models.CharField(max_length=105,verbose_name="cartório de registro")
-    ufcrt = models.CharField(max_length=10, choices=UF,verbose_name="UF do cartório")
-    cidcrt = models.CharField(max_length=105,verbose_name="cidade do cartório")
-    #imgCert = models.ImageField(upload_to='imagens/{}{}{}'.format(self.nome,self.id,self.ano))
-    #image = models.ImageField(upload_to='media')
-
-    qrg = models.CharField(max_length=10, choices=Qrg,verbose_name="possui R.G?")
-    norg = models.CharField(max_length=105,verbose_name="número do R.G")
-    orgrg = models.CharField(max_length=105,verbose_name="Órgão emissor")
-    ufrg = models.CharField(max_length=10, choices=UF,verbose_name="UF do Órgão Emissor")
-    dtrg = models.CharField(max_length=105,verbose_name="data de emissão do R.G")
-    cpf = models.CharField(max_length=105,verbose_name="C.P.F.")
-    pasp = models.CharField(max_length=105,verbose_name="passaporte")
-
-    usuario = models.ForeignKey(Usuario,null=True, blank=True, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno,null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return  "({}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{})".format(
@@ -227,7 +170,7 @@ class End(models.Model):
     ct1 = models.CharField(max_length=105,default="", verbose_name="contato #1")
     ct2 = models.CharField(max_length=105,default="",verbose_name="contato #2")
 
-    usuario = models.ForeignKey(Usuario,null=True, blank=True, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno,null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return  "({}{}{}{}{}{}{}{}{}{}{})".format(self.end, self.num,
@@ -317,7 +260,7 @@ class Sau(models.Model):
     tdi = models.CharField(max_length=10, choices=TDI,verbose_name="transtorno desintegrativo da infância")
     ahs = models.CharField(max_length=10, choices=AHS,verbose_name="altas habilidades/superdotação")
 
-    usuario = models.ForeignKey(Usuario,null=True, blank=True, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno,null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return  "{({}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{})".format(self.aep,self.cego,self.bv,self.sc,self.sd,self.da,self.di,self.dm,
@@ -346,7 +289,7 @@ class Soc(models.Model):
     pbt = models.CharField(max_length=10, choices=PBT,verbose_name="é atendido pelo PBT(Programa Bolsa Trabalho)?")
     peti = models.CharField(max_length=10, choices=PETI,verbose_name="é atendido(a) pelo PETI(Programa de Erradicação do Trabalho Infantil)")
 
-    usuario = models.ForeignKey(Usuario,null=True, blank=True, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno,null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return  "{({}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{})".format(self.aep,self.saep,self.naep,self.cego,self.bv,self.sc,self.sd,self.da,self.di,self.dm,
@@ -400,7 +343,7 @@ class Transp(models.Model):
     aqua = models.CharField(max_length=10, choices=Aqua,verbose_name="aquaviário/embarcação")
     trm = models.CharField(max_length=10, choices=Trm,verbose_name="trem/metrô")
 
-    usuario = models.ForeignKey(Usuario,null=True, blank=True, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno,null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return  "{({}{}{}{}{}{}{})".format(self.pprte,self.pbfa,self.qserv,self.urb,self.rod,self.aqua,self.trm)
@@ -442,9 +385,26 @@ class Proc(models.Model):
     seq = models.CharField(max_length=100,verbose_name="sequencial (0 a 99)")
     rat = models.CharField(max_length=10, choices=RAT,verbose_name="recebe escolarização em outro espaço(diferente da escola)?")
 
-    usuario = models.ForeignKey(Usuario,null=True, blank=True, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno,null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return  "{({}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{})".format(self.nesc,self.pore1a,self.pore2a,self.pore3a,self.pore4a,self.comec,self.anx,self.idtnv,self.fase,self.turno,
-        self.turno,self.modal,self.seq,self.rat,
+        self.turno,self.modal,self.seq,self.rat,)
+
+
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+'''class SignUp(models.Model):
+    #aluno = models.OneToOneField(Aluno, null=True, blank=True, on_delete=models.CASCADE)
+    username = models.CharField(max_length=50, verbose_name='usuário')
+    email = models.EmailField(max_length=50, verbose_name='E-Mail')
+    password = models.CharField(max_length=50, verbose_name='Senha')
+    digital = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, unique=True)
+
+    aluno = models.ForeignKey(Aluno, related_name='SignUp', null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{}{}{}{}{}".format(
+        self.username, self.email, self.password,
+        self.digital, self.ingressou
         )
+'''

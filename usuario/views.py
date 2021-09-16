@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 
-from .models import EstudoM, Aluno, Pessoal, Doc, End, Sau, Soc, Transp, Proc
+from .models import *
 
 #---CADASTRO DE DADOS DO ALUNO
 class EstudoC(CreateView):
