@@ -1,0 +1,824 @@
+@chaset "UTF-8";
+
+@media (min-width: 100px) and (max-width: 360px){
+  html{
+    background-color: #363636;
+  }
+  body{
+    background-color: white;
+    padding: 10px;
+  }
+  /* configuração da grade */
+  .grid-container{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    'ba'
+    'bm'
+    'cn'
+    'lt'
+    'rp'
+  }
+
+  .grid-container > .banner{
+    grid-area: ba;
+    background-color: red;
+    width: 100%;
+    height: 200px;
+  }
+
+  .grid-container > .banner > .img-ban > .banner{
+    position: relative;
+    top: 5px;
+    left: 2.5px;
+    width: 75%;
+    height: 75%;
+  }
+  .grid-container > .banner > .logo > .logo{
+    position: absolute;
+    top: 185px;
+    right: 230px;
+    width: 26.5%;
+    height: 7.5%;
+    transform: scaleX(1);
+  }
+  /* nome escola e usuario*/
+  .grid-container > .banner > .tit-ban > h1{
+    position: absolute;
+    top: 30px;
+    left: 55px;
+    width: 70%;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bolder;
+    color: white;
+    text-shadow:
+    0 0 0.2em #111,
+    0 0 0.2em #87F,
+    0 0 0.2em #87F
+  }
+  .grid-container > .banner > .usr > p{
+    position: absolute;
+    top: 140px;
+    left: 20px;
+    font-family: 'Ubuntu';
+    color: white;
+    width: 30%;
+    text-align: center;
+    text-shadow:
+      0 0 0.2em #111,
+      0 0 0.2em #87F,
+      0 0 0.2em #87F
+  }
+  /* menu */
+  .grid-container > .barra-menu > .nav-ban{
+    grid-area: bm;
+    position: absolute;
+    background-color: silver;
+    top: 125px;
+    left: 130px;
+    width: 60%;
+    height: auto;
+    padding: 10px;
+  }
+  .grid-container > .barra-menu > .nav-ban > nav ul {
+    padding:0px;
+    margin:0px;
+    background-color:#EDEDED;
+    list-style:none;
+  }
+  .grid-container > .barra-menu > .nav-ban > nav ul li { display: inline; }
+  .grid-container > .barra-menu > .nav-ban > nav ul li a {
+    padding: 2px 5px;
+    display: inline-block;}
+  .grid-container > .barra-menu > .nav-ban > nav ul li a:hover {
+    background-color:#D6D6D6;
+    color: #6D6D6D;
+    border-bottom:3px solid #EA0000;
+
+    /* visual do link */
+    background-color:#EDEDED;
+    color: #333;
+    text-decoration: none;
+    border-bottom:3px solid #EDEDED;
+  }
+
+  /* corpo da noticia*/
+  .grid-container > .corpo-noticia{
+    grid-area: cn;
+    top: 320px;
+    justify-content: center;
+    height: auto;
+    background-color: gray;
+    font-size: 12px;
+    text-align: justify;
+    text-indent: 1.5em;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .grid-container > .corpo-noticia > h1 {
+    font-family: 'Ubuntu';
+    font-weight: bolder;
+    text-align: center;
+    background-color: silver;
+  }
+  .grid-container > .corpo-noticia > p {
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    text-align: justify;
+    text-indent: 1.5em;
+    background-color: white;
+  }
+
+  .grid-container > .lateral{
+    grid-area: lt;
+    display: flex;
+    justify-content: center;
+    background-color: orange;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .grid-container > .lateral > h1 {
+    font-family: 'Ubuntu';
+    font-weight: bolder;
+    text-align: center;
+    background-color: silver;
+  }
+  .grid-container > .lateral > p{
+    margin: 10px;
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    text-align: justify;
+    background-color: white;
+  }
+  .grid-container > .rodape{
+    grid-area: rp;
+    padding: 5px;
+    background-color: navy;
+    align-items: flex-start;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-areas:
+    'imt t'
+    'imt2 t2'
+    'i1i i1'
+    'i2i i2'
+    'i3i i3'
+  }
+  .grid-container > .rodape a{
+    font-size: 12px;
+  }
+  .textor{
+    grid-area: t;
+  }
+  .rodape > .textor > .loc{
+    grid-area: imt;
+    width: 10%;
+    height: 5%;
+    transform: scaleX(1);
+    position: relative;
+    top: 70px;
+    left: -270px;
+  }
+  .rodape > .textor2{
+    grid-area: t2;
+  }
+  .rodape > .textor2 > .W{
+    grid-area: imt2;
+    width: 10%;
+    height: 5%;
+    transform: scaleX(1);
+    position: relative;
+    top: 60px;
+    left: -270px;
+  }
+  .rodape > .textor2 > .T{
+    grid-area: imt2;
+    width: 10%;
+    height: 5%;
+    transform: scaleX(1);
+    position: relative;
+    top: 60px;
+    left: -270px;
+  }
+  .rodape > .textor, .textor2, .icons1, .icons2, .icons3{
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: bolder;
+    font-size: 12px;
+    color: white;
+  }
+  .rodape > .icons1{grid-area: i1;}
+  .rodape > .icons2{grid-area: i2;}
+  .rodape > .icons3{grid-area: i3;}
+  .rodape> .icons1 > .F{
+    height: 5%;
+    transform: scaleX(1);
+    grid-area: i1i;
+    width: 10%;
+    position: relative;
+    top: 60px;
+    left: -270px;
+  }
+  .rodape > .icons2 > .I{
+    height: 5%;
+    transform: scaleX(1);
+    grid-area: i2i;
+    width: 10%;
+    position: relative;
+    top: 60px;
+    left: -270px;
+  }
+  .rodape > .icons3 > .G{
+    height: 5%;
+    transform: scaleX(1);
+    grid-area: i3i;
+    width: 10%;
+    position: relative;
+    top: 60px;
+    left: -270px;
+  }
+}
+
+/* outros formatos de tela de dispositivo */
+
+@media (min-width: 400px) and (max-width: 600px){
+
+    html{
+      background-color: #1C1C1C;
+    }
+    body{
+      background-color: white;
+      padding: 10px;
+    }
+    .grid-container{
+      display: grid;
+      grid-template-columns: repeat(1,1fr);
+      grid-template-rows: 1fr;
+      grid-template-areas:
+      'bm'
+      'cn'
+      'lt'
+      'rp'
+    }
+    .grid-container > .barra-menu{
+      grid-area: bm;
+      background-color: #FF0000; /*vermelho*/
+      width: 100%;
+      height: 100px;
+    }
+
+    .barra-menu > .img-ban > .banner{
+      position: relative;
+      top: 0px;
+      left: 0px;
+      width: 55%;
+      height: 55%;
+    }
+    .barra-menu > .logo > img{
+      position: absolute;
+      top: 65px;
+      left: 30px;
+      width: 16.5%;
+      height: 5%;
+    }
+
+    .tit-ban > h1{
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      width: 35%;
+      font-size: 14px;
+      text-align: center;
+      font-weight: bold;
+      color: white;
+      text-shadow:
+      0 0 0.2em #111,
+      0 0 0.2em #87F,
+      0 0 0.2em #87F
+    }
+    .nav-ban{
+      position: absolute;
+      top: 100px;
+      left: 25px;
+      width: 85%;
+    }
+    nav ul {
+      padding:0px;
+      margin:0px;
+      background-color:#EDEDED;
+      list-style:none;
+    }
+    nav ul li { display: inline; }
+    nav ul li a {
+      padding: 2px 5px;
+      display: inline-block;}
+    nav ul li a:hover {
+      background-color:#D6D6D6;
+      color: #6D6D6D;
+      border-bottom:3px solid #EA0000;
+
+      /* visual do link */
+      background-color:#EDEDED;
+      color: #333;
+      text-decoration: none;
+      border-bottom:3px solid #EDEDED;
+    }
+    .corpo-noticia{
+      grid-area: cn;
+      display: flex;
+      justify-content: center;
+      background-color: gray;
+    }
+    .corpo-noticia > p {
+      font-family: 'Ubuntu';
+      font-size: 12px;
+      text-align: justify;
+      text-indent: 1.5em;
+      margin: 10px;
+    }
+    .lateral{
+      grid-area: lt;
+      display: flex;
+      justify-content: center;
+      background-color: orange;
+    }
+    .lateral > p{
+      margin: 10px;
+    }
+    .rodape{
+      grid-area: rp;
+      padding: 5px;
+      background-color: navy;
+      align-items: flex-start;
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-template-areas:
+      'imt t'
+      'imt2 t2'
+      'i1i i1'
+      'i2i i2'
+      'i3i i3'
+    }
+    .rodape a{
+      font-size: 12px;
+    }
+    .textor{
+      grid-area: t;
+    }
+    .rodape > .textor > img{
+      grid-area: imt;
+      width: 10%;}
+    .textor2{
+      grid-area: t2;
+    }
+    .rodape > .textor2 > img{
+      grid-area: imt2;
+      width: 10%;}
+    .textor, .textor2, .icons1, .icons2, .icons3{
+      font-family: 'Titillium Web', sans-serif;
+      font-weight: bolder;
+      font-size: 12px;
+      color: white;
+    }
+    .rodape > .icons1{grid-area: i1;}
+    .rodape > .icons2{grid-area: i2;}
+    .rodape > .icons3{grid-area: i3;}
+    .icons1 > img{grid-area: i1i;width: 10%;}
+    .icons2 > img{grid-area: i2i;width: 10%;}
+    .icons3 > img{grid-area: i3i;width: 10%;}
+}
+
+@media (min-width: 600px) and (max-width: 800px){
+  html{
+    background-color: #1C1C1C;
+  }
+  body{
+    background-color: white;
+    padding: 10px;
+  }
+  .grid-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    'bm bm bm bm'
+    'cn cn cn lt'
+    'rp rp rp rp'
+  }
+  .grid-container > .barra-menu{
+    grid-area: bm;
+    background-color: #FF0000; /*vermelho*/
+    width: 100%;
+    height: 99.5%;
+  }
+
+  .barra-menu > .img-ban > .banner{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 35%;
+    height: 25%;
+  }
+  .barra-menu > .logo > img{
+    position: absolute;
+    top: 95px;
+    right: 20px;
+    width: 30%;
+    height: 20%;
+  }
+
+  .tit-ban > h1{
+    position: absolute;
+    top: 100px;
+    left: 60px;
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    text-shadow:
+    0 0 0.2em #111,
+    0 0 0.2em #87F,
+    0 0 0.2em #87F
+  }
+  .nav-ban{
+    position: absolute;
+    top: 190px;
+    left: 35px;
+  }
+  nav ul {
+    padding:0px;
+    margin:0px;
+    background-color:#EDEDED;
+    list-style:none;
+  }
+  nav ul li { display: inline; }
+  nav ul li a {
+    padding: 2px 10px;
+    display: inline-block;}
+  nav ul li a:hover {
+    background-color:#D6D6D6;
+    color: #6D6D6D;
+    border-bottom:3px solid #EA0000;
+
+    /* visual do link */
+    background-color:#EDEDED;
+    color: #333;
+    text-decoration: none;
+    border-bottom:3px solid #EDEDED;
+  }
+  .corpo-noticia{
+    grid-area: cn;
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+  }
+  .corpo-noticia > p {
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    text-align: justify;
+    text-indent: 1.5em;
+    margin: 10px;
+  }
+  .lateral{
+    grid-area: lt;
+    display: flex;
+    justify-content: center;
+    background-color: orange;
+  }
+  .lateral > p{
+    margin: 10px;
+  }
+  .rodape{
+    grid-area: rp;
+    padding: 5px;
+    background-color: navy;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-areas:
+    "imt t t i3i i3 i3"
+    "i1i i1 i2i i2 imt2 t2"
+  }
+  .rodape a{
+    font-size: 12px;
+  }
+  .textor{
+    grid-area: t;
+  }
+  .rodape > .textor > img{
+    grid-area: imt;
+    width: 10%;}
+  .textor2{
+    grid-area: t2;
+  }
+  .rodape > .textor2 > img{
+    grid-area: imt2;
+    width: 10%;}
+  .textor, .textor2, .icons1, .icons2, .icons3{
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: bolder;
+    font-size: 12px;
+    color: white;
+  }
+  .rodape > .icons1{grid-area: i1;}
+  .rodape > .icons2{grid-area: i2;}
+  .rodape > .icons3{grid-area: i3;}
+  .icons1 > img{grid-area: i1i;width: 10%;}
+  .icons2 > img{grid-area: i2i;width: 10%;}
+  .icons3 > img{grid-area: i3i;width: 10%;}
+}
+
+@media (min-width: 800px) and (max-width: 1200px){
+  html{
+    background-color: #1C1C1C;
+  }
+  body{
+    background-color: white;
+    padding: 10px;
+  }
+  .grid-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    'bm bm bm bm'
+    'cn cn cn lt'
+    'rp rp rp rp'
+  }
+  .grid-container > .barra-menu{
+    grid-area: bm;
+    background-color: #FF0000; /*vermelho*/
+    width: 100%;
+    height: 99.5%;
+  }
+
+  .barra-menu > .img-ban > .banner{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 35%;
+    height: 25%;
+  }
+  .barra-menu > .logo > img{
+    position: absolute;
+    top: 95px;
+    right: 20px;
+    width: 30%;
+    height: 20%;
+  }
+
+  .tit-ban > h1{
+    position: absolute;
+    top: 100px;
+    left: 60px;
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    text-shadow:
+    0 0 0.2em #111,
+    0 0 0.2em #87F,
+    0 0 0.2em #87F
+  }
+  .nav-ban{
+    position: absolute;
+    top: 190px;
+    left: 35px;
+  }
+  nav ul {
+    padding:0px;
+    margin:0px;
+    background-color:#EDEDED;
+    list-style:none;
+  }
+  nav ul li { display: inline; }
+  nav ul li a {
+    padding: 2px 10px;
+    display: inline-block;}
+  nav ul li a:hover {
+    background-color:#D6D6D6;
+    color: #6D6D6D;
+    border-bottom:3px solid #EA0000;
+
+    /* visual do link */
+    background-color:#EDEDED;
+    color: #333;
+    text-decoration: none;
+    border-bottom:3px solid #EDEDED;
+  }
+  .corpo-noticia{
+    grid-area: cn;
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+  }
+  .corpo-noticia > p {
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    text-align: justify;
+    text-indent: 1.5em;
+    margin: 10px;
+  }
+  .lateral{
+    grid-area: lt;
+    display: flex;
+    justify-content: center;
+    background-color: orange;
+  }
+  .lateral > p{
+    margin: 10px;
+  }
+  .rodape{
+    grid-area: rp;
+    padding: 5px;
+    background-color: navy;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-areas:
+    "imt t t i3i i3 i3"
+    "i1i i1 i2i i2 imt2 t2"
+  }
+  .rodape a{
+    font-size: 12px;
+  }
+  .textor{
+    grid-area: t;
+  }
+  .rodape > .textor > img{
+    grid-area: imt;
+    width: 10%;}
+  .textor2{
+    grid-area: t2;
+  }
+  .rodape > .textor2 > img{
+    grid-area: imt2;
+    width: 10%;}
+  .textor, .textor2, .icons1, .icons2, .icons3{
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: bolder;
+    font-size: 12px;
+    color: white;
+  }
+  .rodape > .icons1{grid-area: i1;}
+  .rodape > .icons2{grid-area: i2;}
+  .rodape > .icons3{grid-area: i3;}
+  .icons1 > img{grid-area: i1i;width: 10%;}
+  .icons2 > img{grid-area: i2i;width: 10%;}
+  .icons3 > img{grid-area: i3i;width: 10%;}
+}
+
+@media (min-width: 1200px){
+  html{
+    background-color: #1C1C1C;
+  }
+  body{
+    background-color: white;
+    padding: 10px;
+  }
+  .grid-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    'bm bm bm bm'
+    'cn cn cn lt'
+    'rp rp rp rp'
+  }
+  .grid-container > .barra-menu{
+    grid-area: bm;
+    background-color: #FF0000; /*vermelho*/
+    width: 100%;
+    height: 99.5%;
+  }
+
+  .barra-menu > .img-ban > .banner{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 35%;
+    height: 25%;
+  }
+  .barra-menu > .logo > img{
+    position: absolute;
+    top: 95px;
+    right: 20px;
+    width: 30%;
+    height: 20%;
+  }
+  .usr > p{
+    position: absolute;
+    top: 160px;
+    right: 460px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    text-shadow:
+    0 0 0.2em #111,
+    0 0 0.2em #87F,
+    0 0 0.2em #87F
+  }
+  .tit-ban > h1{
+    position: absolute;
+    top: 50px;
+    right: 300px;
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    text-shadow:
+    0 0 0.2em #111,
+    0 0 0.2em #87F,
+    0 0 0.2em #87F
+  }
+  .nav-ban{
+    position: absolute;
+    top: 190px;
+    left: 35px;
+  }
+  nav ul {
+    padding:0px;
+    margin:0px;
+    background-color:#EDEDED;
+    list-style:none;
+  }
+  nav ul li { display: inline; }
+  nav ul li a {
+    padding: 2px 10px;
+    display: inline-block;}
+  nav ul li a:hover {
+    background-color:#D6D6D6;
+    color: #6D6D6D;
+    border-bottom:3px solid #EA0000;
+
+    /* visual do link */
+    background-color:#EDEDED;
+    color: #333;
+    text-decoration: none;
+    border-bottom:3px solid #EDEDED;
+  }
+  .corpo-noticia{
+    grid-area: cn;
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+  }
+  .corpo-noticia > p {
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    text-align: justify;
+    text-indent: 1.5em;
+    margin: 10px;
+  }
+  .lateral{
+    grid-area: lt;
+    display: flex;
+    justify-content: center;
+    background-color: orange;
+  }
+  .lateral > p{
+    margin: 10px;
+  }
+  .rodape{
+    grid-area: rp;
+    padding: 5px;
+    background-color: navy;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-areas:
+    "imt t t i3i i3 i3"
+    "i1i i1 i2i i2 imt2 t2"
+  }
+  .rodape a{
+    font-size: 12px;
+  }
+  .textor{
+    grid-area: t;
+  }
+  .rodape > .textor > img{
+    grid-area: imt;
+    width: 10%;}
+  .textor2{
+    grid-area: t2;
+  }
+  .rodape > .textor2 > img{
+    grid-area: imt2;
+    width: 10%;}
+  .textor, .textor2, .icons1, .icons2, .icons3{
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: bolder;
+    font-size: 12px;
+    color: white;
+  }
+  .rodape > .icons1{grid-area: i1;}
+  .rodape > .icons2{grid-area: i2;}
+  .rodape > .icons3{grid-area: i3;}
+  .icons1 > img{grid-area: i1i;width: 10%;}
+  .icons2 > img{grid-area: i2i;width: 10%;}
+  .icons3 > img{grid-area: i3i;width: 10%;}
+}

@@ -1,0 +1,23 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}CEEJABelém: Cadastro{% endblock %}
+
+
+{% block conteudo %}
+<form id="formular" method="post" enctype='multipart/form-data' >
+  <header>
+    <h2 >Cadastro de Aluno</h2>
+  </header>
+  <div class="corpoForm">
+    <div class="formulario">
+      {% csrf_token %}
+      {{ form|crispy}}
+    </div>
+  </div>
+  <div class="controle">
+  <button type="submit" class="btn btn-primary">Avançar</button>
+  </div>
+</form>
+{% endblock %}
