@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
+
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{% static '/css/base_pagina.css'%}">
+    <link rel="stylesheet" href="{% static 'css/agenda2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/perfil_pagina.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cad_pagina.css' %}">
+    <link rel="stylesheet" href="{% static 'css/servo.css' %}">
+    {% block css %}{% endblock %}
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="banner">
+        <div class="img-ban">
+          <img class="banner" src="{% static 'img/bandeira2.png' %}">
+        </div>
+        <div class="tit-ban">
+          <h1>Centro de Educação em EJA Luiz Octávio Araujo</h1>
+        </div>
+        <div class="usr">
+          <p>Bem-Vindo(a) {{request.user}}</p>
+        </div>
+      </div>
+      <div class="barra-menu">
+        <div class="nav-ban">
+          <nav>
+            <ul class="menu">
+              {% if request.user.is_authenticated %}
+              <li><a href="/">inicio</a></li>
+              <li><a href="/perfil/inicio">Perfil</a></li>
+              <li><a href="/agenda/agendar">Agendar</a></li>
+              <li class="separador"></li>
+              <li><a href="/accounts/logout">Sair</a></li>
+              <li class="separador"></li>
+              <li><a href="/accounts/password/change">Trocar Senha</a></li>
+              {% else %}
+              <li><a href="/">Inicio</a></li>
+              <li><a href="#">Sobre</a></li>
+              <li><a href="/usrs/ensino">Cadastro</a></li>
+              <li><a href="/accounts/login">Acesso</a></li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+        <!--<div class="logo">
+          <img class="logo" src="{% static 'img/ceeja_img1.png' %}" alt="logo">
+        </div>-->
+      </div>
+      <div class="corpo-noticia">
+        {% block conteudo %}
+        {% endblock %}
+      </div>
+      <div class="lateral">
+        {% block lateral %}
+        {% endblock %}
+      </div>
+      <div class="rodape">
+        <div class="textor">
+          <img class="loc" src="{% static 'img/map-marked-alt-solid.svg' %}">
+          <p>Av. Gentil Bitencourt, 53 - São Brás, Belém - PA, 66015-140</p>
+        </div>
+        <div class="icons3">
+          <img class="G" src="{% static 'img/google-brands.svg' %}">G-Mail: ceejaluizotaviopereira@gmail.com
+        </div>
+        <div class="icons1">
+          <img class="F" src="{% static 'img/facebook-f-brands.svg' %}"><a href="https://www.facebook.com/ceeja.belem">Face: CEEJA Belém</a></i>
+        </div>
+        <div class="icons2">
+          <img class="I" src="{% static 'img/instagram-brands.svg' %}"><a href="https://www.instagram.com/ceejabelem/">Insta: CEEJA Belém</a>
+        </div>
+        <div class="textor2">
+          <img class="W" src="{% static 'img/whatsapp-brands.svg' %}">
+          <p>Whatsapp: (91)9</p>
+          <img class="T" src="{% static 'img/telegram-plane-brands.svg' %}">
+          <p>Telegram: (91)9</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

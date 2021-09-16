@@ -1,0 +1,26 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>CEEJABelém: Sucesso</title>
+{% endblock %}
+
+{% block conteudo %}
+  <section class="secaox">
+    <h1>CADASTRO FEITO COM SUCESSO!</h1>
+    <br><br>
+    <p>Você preencheu todos os campos,
+      seus dados serão processados e
+      utilizados para melhor atendimento.</p>
+      <br>
+    <p>Agora você pode ou clicar nesse botão</p>
+    <br>
+    <div class="botaox">
+      <a href='/proc'>
+        <button type="button" name="button"style= border-radius: 6px; padding: 10px; cursor: pointer; color: #fff;font-size: 10px;><a href="/">Concluir</a></button>
+      </a>
+    </div>
+    <br>
+    <p>ou clicar no menu e selecionar uma opção</p>
+  </section>
+{% endblock %}
